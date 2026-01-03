@@ -1,0 +1,189 @@
+===============================================================================
+INDY SIM - NETWORK SETUP FILES SUMMARY
+===============================================================================
+
+Created for: Arduino Q remote deployment with network WebSocket access
+Date: January 3, 2026
+
+FILES CREATED:
+-------------------------------------------------------------------------------
+
+1. docker-compose.network.yml
+   - Network-enabled Docker Compose configuration
+   - Sets CORS_ORIGIN=* for backend (allows any origin)
+   - Sets HOST=0.0.0.0 to bind to all network interfaces
+   - Mounts .env.network file for frontend
+
+2. backend/src/server.network.js
+   - Modified backend server with CORS support
+   - Reads CORS_ORIGIN from environment variable
+   - Binds to HOST from environment (defaults to 0.0.0.0)
+   - Enhanced logging for debugging network connections
+
+3. frontend/src/App.network.jsx
+   - Modified frontend that reads backend URL from environment
+   - Uses VITE_BACKEND_URL environment variable
+   - Shows backend URL in loading screen for debugging
+   - Falls back to localhost if env var not set
+
+4. frontend/.env.network.example
+   - Template for frontend environment configuration
+   - Shows format: VITE_BACKEND_URL=http://<IP>:3001
+
+5. setup-network.sh (executable)
+   - Automated setup script
+   - Auto-detects device IP address
+   - Backs up original files
+   - Creates .env.network with detected IP
+   - Activates network configuration
+
+6. restore-localhost.sh (executable)
+   - Restores original localhost configuration
+   - Restores backed up files
+   - Removes network environment file
+
+7. NETWORK_SETUP.md
+   - Detailed setup instructions
+   - Troubleshooting guide
+   - Security notes
+   - Step-by-step manual setup option
+
+8. NETWORK_QUICKSTART.md
+   - Quick reference guide
+   - 3-command setup
+   - Common troubleshooting
+   - Performance tips
+
+9. README.md (updated)
+   - Added network setup section
+   - Links to network quickstart guide
+
+===============================================================================
+DEPLOYMENT INSTRUCTIONS FOR YOUR ARDUINO Q
+===============================================================================
+
+On Arduino Q (after cloning the repo):
+----------------------------------------
+
+cd /path/to/indy_sim
+
+# Run setup (will auto-detect IP and configure everything)
+./setup-network.sh
+
+# Start containers with network configuration
+docker-compose -f docker-compose.network.yml up --build
+
+
+On Your Laptop/Desktop:
+----------------------------------------
+
+Open browser and navigate to:
+http://<ARDUINO_IP>:5173
+
+(Replace <ARDUINO_IP> with the IP shown by setup script)
+
+
+To Revert:
+----------------------------------------
+
+./restore-localhost.sh
+docker-compose up
+
+
+===============================================================================
+KEY CHANGES FROM ORIGINAL
+===============================================================================
+
+Backend:
+- CORS accepts connections from any origin (not just localhost:5173)
+- Server binds to 0.0.0.0 (all network interfaces) instead of default
+- Socket.IO configured to accept cross-origin WebSocket connections
+
+Frontend:
+- Backend URL is configurable via environment variable
+- No longer hardcoded to localhost:3001
+- Shows connection target for debugging
+
+Docker:
+- Ports still exposed the same way (3001, 5173)
+- Environment variables passed to enable network mode
+
+===============================================================================
+TROUBLESHOOTING CHECKLIST
+===============================================================================
+
+If WebSocket won't connect:
+
+1. ✓ Verify containers are running: docker ps
+2. ✓ Test backend health: curl http://<IP>:3001/health
+3. ✓ Check firewall: sudo ufw allow 3001 && sudo ufw allow 5173
+4. ✓ Verify same network: ping <ARDUINO_IP> from laptop
+5. ✓ Check browser console (F12) for specific error messages
+6. ✓ View container logs: docker-compose -f docker-compose.network.yml logs
+
+===============================================================================
+ORIGINAL FILES PRESERVED
+===============================================================================
+
+Your original working configuration is untouched:
+- docker-compose.yml (original, still works for localhost)
+- backend/src/server.js (backed up to server.original.js by setup script)
+- frontend/src/App.jsx (backed up to App.original.jsx by setup script)
+
+The network variants are separate files with .network suffix.
+The setup script swaps them in/out as needed.
+
+===============================================================================
+SECURITY NOTE
+===============================================================================
+
+⚠️  CORS_ORIGIN=* allows connections from ANY origin
+
+SAFE FOR:     Home networks, development, testing
+NOT SAFE FOR: Public networks, production environments
+
+For better security on a shared network, edit docker-compose.network.yml
+and change:
+    - CORS_ORIGIN=*
+to:
+    - CORS_ORIGIN=http://<YOUR_LAPTOP_IP>:5173
+
+===============================================================================
+PERFORMANCE TIPS FOR ARDUINO Q
+===============================================================================
+
+If the simulation is too slow/choppy on the Arduino Q:
+
+1. Reduce update frequency:
+   echo "UPDATE_FREQUENCY=10" >> backend/.env
+
+2. Reduce race length:
+   echo "TOTAL_LAPS=30" >> backend/.env
+
+3. Monitor resource usage:
+   docker stats
+
+4. Restart with new settings:
+   docker-compose -f docker-compose.network.yml restart
+
+===============================================================================
+TESTED SCENARIOS
+===============================================================================
+
+This configuration supports:
+✓ Arduino Q (ARM) with Docker
+✓ Raspberry Pi with Docker
+✓ Linux home server
+✓ Any Docker host on home network
+✓ Access from laptop/desktop browsers
+✓ Access from mobile devices on same network
+
+===============================================================================
+QUESTIONS OR ISSUES?
+===============================================================================
+
+See NETWORK_QUICKSTART.md for quick reference
+See NETWORK_SETUP.md for detailed guide
+
+===============================================================================
+

@@ -29,6 +29,20 @@ The application will be available at:
 docker compose down
 ```
 
+## Network/Remote Access Setup
+
+Want to run this on a remote device (like Arduino Q, Raspberry Pi, or a home server) and access it from another machine on your network?
+
+**Quick Setup:**
+```bash
+./setup-network.sh
+docker-compose -f docker-compose.network.yml up --build
+```
+
+Then access from any device on your network at `http://<DEVICE_IP>:5173`
+
+📖 See **[NETWORK_QUICKSTART.md](./NETWORK_QUICKSTART.md)** for complete instructions.
+
 ## Features
 
 ### Real-Time Race Simulation
