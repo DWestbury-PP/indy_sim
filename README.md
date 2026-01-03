@@ -1,4 +1,6 @@
 # Indy Sim - F1 Race Simulation
+![Frontend UI Preview](./docs/frontend_UI.png)
+
 
 A simple web app to demonstrate real-time data processing using an edge computing system. This simulation uses an F1 race team with comprehensive telemetry, interactive visualizations, and basic "mission control aesthetics".
 
