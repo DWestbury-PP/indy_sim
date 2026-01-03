@@ -1,0 +1,19 @@
+.sparkline {
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.sparkline-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sparkline-label {
+  font-size: 0.7rem;
+  color: #999999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

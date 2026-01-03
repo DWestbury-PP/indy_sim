@@ -1,0 +1,312 @@
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #00d9ff;
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  color: #00d9ff;
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+.connection-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.connection-status.connected {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+.connection-status.disconnected {
+  background: rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
+  border: 1px solid #ff3b30;
+}
+
+.app-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  color: #00d9ff;
+}
+
+.race-container {
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.race-info {
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid #00d9ff;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.race-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.race-info h2 {
+  color: #00d9ff;
+  margin: 0;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.metric-header .metric-label {
+  font-size: 0.7rem;
+  color: #999999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.metric-header .metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00d9ff;
+}
+
+.lap-progress {
+  flex: 1;
+  min-width: 300px;
+}
+
+.race-time .metric-value {
+  font-size: 1.3rem;
+}
+
+.gap-info {
+  min-width: 120px;
+  text-align: center;
+}
+
+.gap-value {
+  font-size: 1.4rem;
+  color: #ff9500;
+  text-shadow: 0 0 10px rgba(255, 149, 0, 0.5);
+}
+
+.gap-details {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #999999;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.race-content {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.car-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.track-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1400px) {
+  .race-content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .car-column:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .track-section {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+
+  .car-column:last-child {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .race-content {
+    grid-template-columns: 1fr;
+  }
+
+  .car-column,
+  .track-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+.car-card {
+  background: rgba(26, 26, 26, 0.8);
+  border: 2px solid;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.car-card-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.tire-sidebar {
+  display: flex;
+  align-items: flex-start;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 217, 255, 0.3);
+}
+
+.car-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.car-header h3 {
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.position {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #00d9ff;
+}
+
+.car-data {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.data-section {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.data-section h4 {
+  color: #bd00ff;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.data-section p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin: 0.35rem 0;
+  color: #cccccc;
+  line-height: 1.3;
+}
+
+.metric-with-trend {
+  margin: 0.5rem 0;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #00d9ff;
+}
+
+/* Scrollbar styling */
+.app-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.app-main::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.app-main::-webkit-scrollbar-thumb {
+  background: #00d9ff;
+  border-radius: 4px;
+}
+
+.app-main::-webkit-scrollbar-thumb:hover {
+  background: #00b3d9;
+}

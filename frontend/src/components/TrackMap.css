@@ -1,0 +1,122 @@
+.track-map {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.track-header h3 {
+  color: #00d9ff;
+  font-size: 1.2rem;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.track-svg {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  max-height: 700px;
+  filter: drop-shadow(0 4px 20px rgba(0, 217, 255, 0.2));
+}
+
+@media (max-width: 1400px) {
+  .track-svg {
+    min-height: 400px;
+    max-height: 500px;
+  }
+}
+
+/* Track styling */
+.track-outer {
+  transition: stroke 0.3s ease;
+}
+
+.track-surface {
+  transition: stroke 0.3s ease;
+}
+
+.track-centerline {
+  animation: dash 20s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* Sector labels */
+.sector-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* Car markers */
+.car-marker {
+  transition: transform 0.1s linear;
+  cursor: pointer;
+}
+
+.car-marker:hover rect {
+  opacity: 1;
+  filter: brightness(1.3);
+}
+
+.car-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.position-badge {
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* Start/Finish line */
+.start-finish {
+  filter: drop-shadow(0 0 4px white);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .track-map {
+    padding: 0.75rem;
+  }
+
+  .track-svg {
+    max-height: 300px;
+  }
+
+  .car-label {
+    font-size: 9px;
+  }
+
+  .position-badge {
+    font-size: 8px;
+  }
+}
+
+/* Animation for car movement */
+.car-marker > g {
+  transition: transform 0.05s linear;
+}
+
+/* Glow effect for track */
+.track-surface {
+  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.4));
+}
