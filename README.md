@@ -298,4 +298,4 @@ Potential additions for extended demos:
 
 ## Documentation
 
-For detailed technical specifications and design decisions, see [SPEC.md](./SPEC.md)
+For detailed technical specifications and design decisions, see [SPEC.md](./docs/SPEC.md)
