@@ -5,7 +5,9 @@
       "Bash(docker-compose up:*)",
       "Bash(curl:*)",
       "Bash(docker-compose down:*)",
-      "Bash(docker compose:*)"
+      "Bash(docker compose:*)",
+      "Bash(find:*)",
+      "Bash(tree:*)"
     ]
   }
 }

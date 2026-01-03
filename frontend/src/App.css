@@ -149,6 +149,58 @@
 .car-column {
   display: flex;
   flex-direction: column;
+  perspective: 1000px;
+}
+
+/* Card flip container */
+.car-card-wrapper {
+  width: 100%;
+  height: fit-content;
+  min-height: 500px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.car-card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.car-card-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+.car-card-front,
+.car-card-back {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.car-card-front {
+  position: relative;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.car-card-front .car-card-content,
+.car-card-front .car-header {
+  position: relative;
+  z-index: 1;
+}
+
+.car-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: rotateY(180deg);
+  min-height: 500px;
 }
 
 .track-section {
@@ -215,8 +267,29 @@
   align-items: flex-start;
 }
 
-.car-card:hover {
+.car-card-wrapper:hover .car-card-front {
   transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 217, 255, 0.3);
+}
+
+.car-card-front::after {
+  content: '↻ Click to flip';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.7rem;
+  color: #666666;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.car-card-wrapper:hover .car-card-front::after {
+  opacity: 1;
+}
+
+.car-card-back:hover {
+  /* No hover effect on back to prevent auto-flip feel */
   box-shadow: 0 12px 40px rgba(0, 217, 255, 0.3);
 }
 

@@ -1,0 +1,175 @@
+.car-technical-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 15px;
+  padding: 1rem;
+  position: relative;
+}
+
+.technical-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.technical-header h3 {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.technical-label {
+  font-size: 0.75rem;
+  color: #00d9ff;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+}
+
+.wireframe-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wireframe-image {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0.6;
+  filter: brightness(1.2) contrast(1.3);
+}
+
+/* Data overlay positioning */
+.data-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00d9ff;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  min-width: 60px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
+  }
+}
+
+.overlay-label {
+  font-size: 0.65rem;
+  color: #999999;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.overlay-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #00d9ff;
+}
+
+.overlay-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #666666;
+  margin-top: 0.1rem;
+}
+
+/* Specific overlay positions (adjusted for top-down wireframe) */
+.front-wing {
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rear-wing {
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.engine {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 120px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.tire-fl {
+  top: 30%;
+  left: 5%;
+}
+
+.tire-fr {
+  top: 30%;
+  right: 5%;
+}
+
+.tire-rl {
+  bottom: 30%;
+  left: 5%;
+}
+
+.tire-rr {
+  bottom: 30%;
+  right: 5%;
+}
+
+.brakes {
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.speed-indicator {
+  top: 5%;
+  right: 5%;
+  background: rgba(0, 0, 0, 0.8);
+  border-color: #00d9ff;
+  border-width: 2px;
+  padding: 0.75rem 1rem;
+  min-width: 100px;
+}
+
+.speed-large {
+  font-size: 1.8rem;
+  color: #00d9ff;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
+}
+
+.tire-temp {
+  text-shadow: 0 0 8px currentColor;
+}
+
+.technical-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.click-hint {
+  font-size: 0.75rem;
+  color: #666666;
+  font-style: italic;
+}

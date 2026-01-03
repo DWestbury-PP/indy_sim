@@ -94,7 +94,9 @@ export default function TireDisplay({ tires, compact = false, onPitStop, carId }
   const { compound, age, fl, fr, rl, rr, status } = tires;
   const compoundColor = getCompoundColor(compound);
 
-  const handlePitStop = () => {
+  const handlePitStop = (e) => {
+    // Prevent card flip when clicking pit stop button
+    e.stopPropagation();
     if (onPitStop && carId) {
       onPitStop(carId);
     }

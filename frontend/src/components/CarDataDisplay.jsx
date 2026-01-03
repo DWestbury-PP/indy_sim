@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useTrendData } from '../hooks/useTrendData';
 import DataBar from './DataBar';
 import Sparkline from './Sparkline';
 import TireDisplay from './TireDisplay';
+import CarTechnicalView from './CarTechnicalView';
 
 /**
  * Enhanced car data display with visual metrics
@@ -10,9 +12,19 @@ export default function CarDataDisplay({ car, onPitStop }) {
   // Track trends for sparklines
   const speedHistory = useTrendData(car.track.speed, 20);
   const rpmHistory = useTrendData(car.driver.rpm, 20);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleCardClick = (e) => {
+    // Prevent event bubbling
+    e.stopPropagation();
+    setIsFlipped(!isFlipped);
+  };
 
   return (
-    <div className="car-card" style={{ borderColor: car.teamColor }}>
+    <div className="car-card-wrapper" onClick={handleCardClick} style={{ pointerEvents: 'auto' }}>
+      <div className={`car-card-flipper ${isFlipped ? 'flipped' : ''}`}>
+        {/* Front of card - existing telemetry view */}
+        <div className="car-card car-card-front" style={{ borderColor: car.teamColor }}>
       <div className="car-header">
         <h3>{car.name}</h3>
         <span className="position">P{car.position}</span>
@@ -101,5 +113,12 @@ export default function CarDataDisplay({ car, onPitStop }) {
         )}
       </div>
     </div>
+
+    {/* Back of card - technical wireframe view */}
+    <div className="car-card car-card-back" style={{ borderColor: car.teamColor }}>
+      <CarTechnicalView car={car} />
+    </div>
+  </div>
+</div>
   );
 }

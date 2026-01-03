@@ -197,10 +197,11 @@ export class RaceSimulation {
     console.log(`Executing pit stop for ${car.name} (${carId})`);
 
     // Determine new compound based on current compound
+    const oldCompound = car.tires.compound;
     let newCompound;
-    if (car.tires.compound === 'SOFT') {
+    if (oldCompound === 'SOFT') {
       newCompound = 'MEDIUM';
-    } else if (car.tires.compound === 'MEDIUM') {
+    } else if (oldCompound === 'MEDIUM') {
       newCompound = 'HARD';
     } else {
       newCompound = 'SOFT'; // Cycle back
@@ -209,7 +210,7 @@ export class RaceSimulation {
     // Reset tires with new compound
     car.tires = initializeTires(newCompound);
 
-    console.log(`${car.name} changed from ${car.tires.compound} to ${newCompound} tires`);
+    console.log(`${car.name} changed from ${oldCompound} to ${newCompound} tires`);
   }
 
   /**
