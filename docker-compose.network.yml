@@ -3,8 +3,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    ports:
-      - "3001:3001"
+    network_mode: host
     volumes:
       - ./backend/src:/app/src
       - ./backend/.env:/app/.env
@@ -12,16 +11,14 @@ services:
       - NODE_ENV=development
       - CORS_ORIGIN=*
       - HOST=0.0.0.0
+      - PORT=3001
     restart: unless-stopped
-    networks:
-      - indy-sim-network
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    ports:
-      - "5173:5173"
+    network_mode: host
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public:/app/public
@@ -33,10 +30,4 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
-    networks:
-      - indy-sim-network
-
-networks:
-  indy-sim-network:
-    driver: bridge
 
