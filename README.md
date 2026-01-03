@@ -1,6 +1,6 @@
 # Indy Sim - F1 Race Simulation
 
-A visually stunning web application demonstrating the real-time data processing capabilities of the Omnia edge computing system through an F1 race team simulation with comprehensive telemetry, interactive visualizations, and mission control aesthetics.
+A simple web app to demonstrate real-time data processing using an edge computing system. This simulation uses an F1 race team with comprehensive telemetry, interactive visualizations, and basic "mission control aesthetics".
 
 ## Quick Start
 
@@ -175,7 +175,7 @@ Backend (30 Hz)           WebSocket          Frontend (React)
 │   • Tires (8 data) │                  │   • Track map        │
 │   • Race info      │                  │   • Visual effects   │
 └────────────────────┘                  └──────────────────────┘
-         ↑                                          ↓
+         ↑                                           ↓
          │                                   User Actions
          └──────────────  Pit Stop  ─────────────────┘
 ```
@@ -297,12 +297,3 @@ Potential additions for extended demos:
 ## Documentation
 
 For detailed technical specifications and design decisions, see [SPEC.md](./SPEC.md)
-
-## License
-
-Proprietary - Omnia System Demonstration
-
----
-
-**Built for the Omnia Edge Computing Platform**
-Demonstrating real-time data processing with 4TB DDR6 RAM, 320 AMD CPU cores, and 2x Nvidia Blackwell GPUs
