@@ -24,28 +24,28 @@ Arduino_LED_Matrix matrix;
 
 // Enhanced track layout - circuit style with straights and corners
 // Designed to match the racing circuit feel of the web interface
-const uint8_t TRACK_SIZE = 34;
+const uint8_t TRACK_SIZE = 40;
 const struct {
   uint8_t x;
   uint8_t y;
 } trackPixels[TRACK_SIZE] = {
-  // START/FINISH straight (top)
+  // START/FINISH straight (top) - 10 pixels
   {1,1}, {2,1}, {3,1}, {4,1}, {5,1}, {6,1}, {7,1}, {8,1}, {9,1}, {10,1},
-  // Turn 1 (hairpin right)
-  {10,2}, {10,3}, {10,4},
-  // Back straight
-  {9,4}, {8,4}, {7,4}, {6,4}, {5,4}, {4,4}, {3,4}, {2,4},
-  // Turn 2 (hairpin left)
-  {1,4}, {1,5}, {1,6},
-  // Final section back to start
-  {2,6}, {3,6}, {4,6}, {5,6}, {6,6}, {7,6}, {8,6}, {9,6}, {10,6},
-  // Return to start
-  {10,5}, {10,4}, {10,3}, {10,2}, {10,1}
+  // Turn 1 (hairpin right) - 4 pixels
+  {11,1}, {11,2}, {11,3}, {11,4},
+  // Back straight - 10 pixels
+  {10,4}, {9,4}, {8,4}, {7,4}, {6,4}, {5,4}, {4,4}, {3,4}, {2,4}, {1,4},
+  // Turn 2 (hairpin left) - 4 pixels
+  {0,4}, {0,5}, {0,6}, {0,7},
+  // Final section back to start - 10 pixels
+  {1,7}, {2,7}, {3,7}, {4,7}, {5,7}, {6,7}, {7,7}, {8,7}, {9,7}, {10,7},
+  // Return to start - 2 pixels
+  {11,7}, {11,6}
 };
 
 // Sector markers (divide track into thirds)
-const uint8_t SECTOR_1 = 11;  // End of first sector
-const uint8_t SECTOR_2 = 22;  // End of second sector
+const uint8_t SECTOR_1 = 13;  // End of first sector (after turn 1)
+const uint8_t SECTOR_2 = 27;  // End of second sector (after turn 2)
 
 // Race state
 struct RaceData {
