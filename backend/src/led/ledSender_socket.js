@@ -153,7 +153,7 @@ export class LEDSenderSocket {
       
       // Debug log (occasional)
       if (this.stats.sent % 100 === 0) {
-        console.log(`[LED Sender] Sent ${this.stats.sent} messages. Car1: ${message.params.car1_pos}m, Car2: ${message.params.car2_pos}m`);
+        console.log(`[LED Sender] Sent ${this.stats.sent} messages. Car1: ${message.params[0]}m, Car2: ${message.params[1]}m`);
       }
       
     } catch (error) {
