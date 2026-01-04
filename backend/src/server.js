@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { RaceSimulation } from './simulation/raceEngine.js';
+import { LEDSenderSocket } from '../arduino-led/backend-extension/ledSender_socket.js';
 
 dotenv.config();
 
@@ -31,6 +32,14 @@ const raceSimulation = new RaceSimulation({
   updateFrequency: parseInt(process.env.UPDATE_FREQUENCY) || 30
 });
 
+// Initialize LED sender (for Arduino Q LED matrix)
+const ledSender = new LEDSenderSocket({
+  enabled: process.env.ENABLE_LED_DISPLAY !== 'false', // Enable by default
+  updateRate: 20 // 20 Hz for LED matrix
+});
+
+console.log(`LED Display: ${ledSender.enabled ? 'Enabled' : 'Disabled'}`);
+
 // WebSocket connection handling
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
@@ -57,7 +66,16 @@ setInterval(() => {
   raceSimulation.update();
   const state = raceSimulation.getCurrentState();
   io.emit('raceUpdate', state);
+  
+  // Send to LED matrix
+  ledSender.sendData(state);
 }, updateInterval);
+
+// Cleanup on exit
+process.on('SIGINT', () => {
+  ledSender.close();
+  process.exit();
+});
 
 const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
