@@ -40,6 +40,10 @@ fi
 # Create app directory if it doesn't exist
 if [ ! -d "$APP_DIR" ]; then
     echo "Creating app from blink example..."
+    
+    # Ensure apps directory exists
+    mkdir -p ~/.local/share/arduino-app-cli/apps
+    
     cp -r ~/.local/share/arduino-app-cli/examples/blink "$APP_DIR"
     echo "✓ App directory created"
 fi
