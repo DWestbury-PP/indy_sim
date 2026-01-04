@@ -41,7 +41,19 @@ docker-compose -f docker-compose.network.yml up --build
 
 Then access from any device on your network at `http://<DEVICE_IP>:5173`
 
-📖 See **[NETWORK_QUICKSTART.md](./NETWORK_QUICKSTART.md)** for complete instructions.
+## Arduino Q LED Matrix Display 🎨✨
+
+Running on Arduino Q? You can also display the race on the embedded LED matrix! The cars will appear as moving dots on a track visualization.
+
+**Status:** Investigation phase - see `arduino-led/` directory
+
+**Quick Start:**
+```bash
+cd arduino-led
+./investigate.sh
+```
+
+📖 See **[LED_DISPLAY_SUMMARY.md](./LED_DISPLAY_SUMMARY.md)** for details.
 
 ## Features
 

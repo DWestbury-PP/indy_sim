@@ -1,0 +1,20 @@
+# Investigation output
+arduino_q_findings.txt
+
+# Sketch build artifacts
+sketch/*.hex
+sketch/*.elf
+sketch/*.bin
+sketch/build/
+
+# Node modules if we add any
+node_modules/
+
+# Test data
+test_data.txt
+*.log
+
+# Arduino IDE files
+*.ino.bak
+.DS_Store
+
