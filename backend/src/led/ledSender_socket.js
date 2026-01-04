@@ -138,8 +138,8 @@ export class LEDSenderSocket {
         jsonrpc: '2.0',
         method: this.method,
         params: [
-          Math.round(car1.track.trackPosition),
-          Math.round(car2.track.trackPosition)
+          Math.round(car1.position),
+          Math.round(car2.position)
         ],
         id: ++this.messageId
       };
