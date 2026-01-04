@@ -86,7 +86,7 @@ echo "Starting app..."
 echo "(This will compile and upload the sketch)"
 echo ""
 
-arduino-app-cli app start $APP_NAME
+arduino-app-cli app start $APP_DIR
 
 echo ""
 echo "=========================================="
