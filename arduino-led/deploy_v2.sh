@@ -28,6 +28,13 @@ mkdir -p "$APP_DIR/sketch"
 cp sketch/indy_sim_display_v2.ino "$APP_DIR/sketch/sketch.ino"
 echo "✓ Sketch updated to v2"
 
+# Copy Python stub  
+echo "Copying Python stub..."
+mkdir -p "$APP_DIR/python"
+cp python_stub/main.py "$APP_DIR/python/main.py"
+cp python_stub/requirements.txt "$APP_DIR/python/requirements.txt"
+echo "✓ Python stub updated"
+
 echo ""
 echo "Starting enhanced version..."
 arduino-app-cli app start $APP_DIR

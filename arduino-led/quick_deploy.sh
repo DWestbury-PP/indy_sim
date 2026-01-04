@@ -64,8 +64,12 @@ mkdir -p "$APP_DIR/sketch"
 cp "$SKETCH_SOURCE" "$APP_DIR/sketch/sketch.ino"
 echo "✓ Sketch copied"
 
-# Remove Python files (not needed for this app)
-rm -f "$APP_DIR/main.py" "$APP_DIR/requirements.txt"
+# Copy Python stub (needed by app framework but doesn't do anything)
+echo "Copying Python stub..."
+mkdir -p "$APP_DIR/python"
+cp python_stub/main.py "$APP_DIR/python/main.py"
+cp python_stub/requirements.txt "$APP_DIR/python/requirements.txt"
+echo "✓ Python stub copied"
 
 echo ""
 echo "=========================================="
