@@ -6,6 +6,9 @@
  * 
  * LED Matrix: 13x8 pixels (using 12x8 for track)
  * Communication: JSON-RPC via arduino-router
+ * 
+ * Method registered: "indy/raceUpdate"
+ * Parameters: car1_pos (uint16_t), car2_pos (uint16_t)
  */
 
 #include <Arduino_LED_Matrix.h>
@@ -61,22 +64,30 @@ void setup() {
   // Show startup animation
   showStartupAnimation();
   
-  // TODO: Initialize RouterBridge when we know the API
-  // RouterBridge.begin();
-  // RouterBridge.onMessage("indy/raceUpdate", handleRaceUpdate);
+  // Initialize RouterBridge
+  Bridge.begin();
+  
+  // Register method to receive race updates from backend
+  Bridge.provide("indy/raceUpdate", handleRaceUpdate);
   
   Serial.println("Indy Sim LED Display Ready");
   Serial.println("Matrix: 12x8 pixels");
+  Serial.println("Method registered: indy/raceUpdate");
   Serial.println("Waiting for race data...");
   
-  // For testing without RouterBridge, simulate data
+  // Start with simulation data for testing
+  // Will be replaced by real data when backend connects
   raceData.valid = true;
 }
 
 void loop() {
-  // TODO: When RouterBridge is configured, it will call handleRaceUpdate()
-  // For now, simulate race data for testing
-  simulateRaceData();
+  // Bridge.update() is called automatically by the framework
+  // handleRaceUpdate() will be called when backend sends data
+  
+  // If no real data received yet, use simulation for testing
+  if (!raceData.valid || millis() < 5000) {
+    simulateRaceData();
+  }
   
   // Update display at fixed rate
   unsigned long now = millis();
@@ -87,19 +98,27 @@ void loop() {
 }
 
 /**
- * Handle incoming race data (will be called by RouterBridge)
- * Expected format: {"car1_pos": 234, "car2_pos": 189}
+ * Handle incoming race data from backend
+ * Called by RouterBridge when backend sends "indy/raceUpdate"
+ * 
+ * @param car1_pos Car 1 position in meters (0-5281)
+ * @param car2_pos Car 2 position in meters (0-5281)
  */
-void handleRaceUpdate(/* parameters from RouterBridge */) {
-  // TODO: Parse JSON when we know RouterBridge API
-  // For now, this is a placeholder
+void handleRaceUpdate(uint16_t car1_pos, uint16_t car2_pos) {
+  raceData.car1_pos = car1_pos;
+  raceData.car2_pos = car2_pos;
+  raceData.valid = true;
   
-  // Example parsing (adapt based on actual API):
-  // raceData.car1_pos = json["car1_pos"];
-  // raceData.car2_pos = json["car2_pos"];
-  // raceData.valid = true;
-  
-  Serial.println("Race data received");
+  // Debug output (occasional)
+  static unsigned long lastPrint = 0;
+  if (millis() - lastPrint > 2000) {
+    Serial.print("Race update: Car1=");
+    Serial.print(car1_pos);
+    Serial.print("m, Car2=");
+    Serial.print(car2_pos);
+    Serial.println("m");
+    lastPrint = millis();
+  }
 }
 
 /**

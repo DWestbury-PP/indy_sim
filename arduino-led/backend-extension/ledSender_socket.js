@@ -133,13 +133,14 @@ export class LEDSenderSocket {
       const car2 = raceState.cars[1];
       
       // Create JSON-RPC message
+      // Parameters must be an array to match sketch signature: handleRaceUpdate(uint16_t, uint16_t)
       const message = {
         jsonrpc: '2.0',
         method: this.method,
-        params: {
-          car1_pos: Math.round(car1.track.trackPosition),
-          car2_pos: Math.round(car2.track.trackPosition)
-        },
+        params: [
+          Math.round(car1.track.trackPosition),
+          Math.round(car2.track.trackPosition)
+        ],
         id: ++this.messageId
       };
       
