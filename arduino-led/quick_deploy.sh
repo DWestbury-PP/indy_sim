@@ -54,9 +54,10 @@ version: 1.0.0
 EOF
 echo "✓ app.yaml updated"
 
-# Copy sketch
+# Copy sketch (Arduino Q apps use sketch/ subdirectory)
 echo "Copying sketch..."
-cp "$SKETCH_SOURCE" "$APP_DIR/sketch.ino"
+mkdir -p "$APP_DIR/sketch"
+cp "$SKETCH_SOURCE" "$APP_DIR/sketch/sketch.ino"
 echo "✓ Sketch copied"
 
 # Remove Python files (not needed for this app)
