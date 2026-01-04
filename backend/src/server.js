@@ -4,7 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { RaceSimulation } from './simulation/raceEngine.js';
-import { LEDSenderSocket } from '../arduino-led/backend-extension/ledSender_socket.js';
+import { LEDSenderSocket } from './led/ledSender_socket.js';
 
 dotenv.config();
 
